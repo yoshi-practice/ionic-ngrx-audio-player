@@ -6,6 +6,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { AudioProvider } from '../providers/audio/audio';
+import { CloudProvider } from '../providers/cloud/cloud';
+
+import { StoreModule } from '@ngrx/store';
+import { mediaStateReducer } from '../providers/store/store';
 
 @NgModule({
   declarations: [
@@ -14,7 +19,10 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    StoreModule.forRoot({
+      appState: mediaStateReducer
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -24,7 +32,9 @@ import { HomePage } from '../pages/home/home';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AudioProvider,
+    CloudProvider
   ]
 })
 export class AppModule {}
