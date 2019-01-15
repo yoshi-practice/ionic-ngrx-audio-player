@@ -9,6 +9,9 @@ import { HomePage } from '../pages/home/home';
 import { AudioProvider } from '../providers/audio/audio';
 import { CloudProvider } from '../providers/cloud/cloud';
 
+import { StoreModule } from '@ngrx/store';
+import { mediaStateReducer } from '../providers/store/store';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -16,7 +19,10 @@ import { CloudProvider } from '../providers/cloud/cloud';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    StoreModule.forRoot({
+      appState: mediaStateReducer
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
