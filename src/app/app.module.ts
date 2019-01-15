@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { AudioProvider } from '../providers/audio/audio';
+import { CloudProvider } from '../providers/cloud/cloud';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AudioProvider } from '../providers/audio/audio';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AudioProvider
+    AudioProvider,
+    CloudProvider
   ]
 })
 export class AppModule {}
