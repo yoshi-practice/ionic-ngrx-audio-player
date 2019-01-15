@@ -28,24 +28,28 @@ export class AudioProvider {
     };
 
     return Observable.create(observer => {
-      // 再生オーディオ
+      // Play audio
       this.audioObj.src = url;
       this.audioObj.load();
       this.audioObj.play();
 
-      // メディアイベント
+      // Media Events
       const handler = (event) => observer.next(event);
       addEvents(this.audioObj, events, handler);
 
       return () => {
-        // 再生停止
+        // Stop Playing
         this.audioObj.pause();
         this.audioObj.currentTime = 0;
 
-        // EventListeners を削除します
+        // Remove EventListeners
         removeEvents(this.audioObj, events, handler);
       };
     });
+  }
+
+  playStream(url) {
+    return this.streamObservable(url).pipe(takeUntil(this.stop$));
   }
 
   play() {
@@ -66,9 +70,5 @@ export class AudioProvider {
 
   formatTime(time, format) {
     return moment.utc(time).format(format);
-  }
-  
-  playStream(url) {
-    return this.streamObservable(url).pipe(takeUntil(this.stop$));
   }
 }
